@@ -3,3 +3,4 @@ claude.md
 /claude-plan-md-files
 .env
 .env.*
+node_modules
