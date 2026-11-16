@@ -1,8 +1,11 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { eq } from 'drizzle-orm';
 import { usersTable } from './db/schema.js';
-  
+
+// Using local env vars for now. (Production mode coming soon for v1.0)
+dotenv.config({ path: '.env.local' });
+
 const db = drizzle(process.env.DATABASE_URL!);
 
 async function main() {
