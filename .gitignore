@@ -4,8 +4,5 @@ claude.md
 .env
 .env.*
 node_modules
-<<<<<<< HEAD
-=======
 .next
 /next
->>>>>>> 60eda92 (.gitignore)
