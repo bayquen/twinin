@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { eq } from 'drizzle-orm';
-import { usersTable } from './db/schema.js';
+import { session, gift_request, transaction } from './db/schema.js';
 
 // Using local env vars for now. (Production mode coming soon for v1.0)
 dotenv.config({ path: '.env.local' });
@@ -9,7 +9,7 @@ dotenv.config({ path: '.env.local' });
 const db = drizzle(process.env.DATABASE_URL!);
 
 async function main() {
-  const user: typeof usersTable.$inferInsert = {
+  const user: typeof session.$inferInsert = {
     name: 'John',
     age: 30,
     email: 'john@example.com',
@@ -20,14 +20,6 @@ async function main() {
 
   const users = await db.select().from(usersTable);
   console.log('Getting all users from the database: ', users)
-  /*
-  const users: {
-    id: number;
-    name: string;
-    age: number;
-    email: string;
-  }[]
-  */
 
   await db
     .update(usersTable)
