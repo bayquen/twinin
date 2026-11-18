@@ -15,7 +15,7 @@ export const gift_request_table = pgTable("gift_requests", {
     first_name: string,
     last_name: string,
     street_address: string,
-    address_city: string,
+    address_locality: string,
     address_region: string,
     postal_code: string,
     address_country: string,
@@ -28,7 +28,7 @@ export const transactionStatus = pgEnum("transaction_status", ["pending", "prepa
 
 export const transaction_table = pgTable("transactions", {
   id: uuid().primaryKey().defaultRandom(),
-  giftRequestId: uuid().notNull().references(() => session_table.id),
+  giftRequestId: uuid().notNull().references(() => gift_request_table.id),
   idempotencyKey: text().notNull().unique(),
   sapiomTransactionId: text().unique(),
   status: transactionStatus().notNull().default("pending"),
