@@ -1,5 +1,6 @@
 // Program: errors.ts
-// Purpose: Custom error class for our app using Sapiom yay!
+// Purpose: Defines SapiomError, which carries the HTTP status and Sapiom's error code. 
+//          Callers can then handle specific cases, like a 409 on spending limits
 
 // Carries the HTTP status and Sapiom's error `code` so callers can branch on them
 // (e.g. 409 on limits, 409 "card_relayed" on cancel).
