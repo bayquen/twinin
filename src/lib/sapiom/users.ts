@@ -1,3 +1,6 @@
+// Program: users.ts
+// Purpose: Creating Sapiom users and their keys.
+
 import { getPlatformKey } from "./config";
 import { sapiomFetch } from "./http";
 
