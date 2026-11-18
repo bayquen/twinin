@@ -19,7 +19,7 @@ export const gift_request_table = pgTable("gift_requests", {
     address_region: string,
     postal_code: string,
     address_country: string,
-    contact: { "email": string }
+    contact: { "email": string, "phone_number": string }
   }>().notNull(),
   createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
 });

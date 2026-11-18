@@ -5,6 +5,7 @@
       "@/styles/*": ["./src/styles/*"],
       "@/components/*": ["./src/components/*"],
       "@/utils/*": ["./src/utils/*"],
+      "@/db/*": ["./src/db/*"],
     },
     "target": "ES2017",
     "lib": [
