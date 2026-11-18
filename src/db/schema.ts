@@ -1,14 +1,14 @@
 import { integer, text, uuid, timestamp, jsonb, pgEnum, pgTable } from "drizzle-orm/pg-core";
 
-export const session = pgTable("session", {
+export const session_table = pgTable("sessions", {
   id: uuid().primaryKey().defaultRandom(),
   sapiomUserId: text().unique(),
   sapiomCardId: text(),
   createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
 });
-export const gift_request = pgTable("gift_request", {
+export const gift_request_table = pgTable("gift_requests", {
   id: uuid().primaryKey().defaultRandom(),
-  sessionId: uuid().notNull().references(() => session.id),
+  sessionId: uuid().notNull().references(() => session_table.id),
   giftInterest: text().notNull(),
   budgetCents: integer().notNull(),
   shippingInfo: jsonb().$type<{ 
@@ -26,9 +26,9 @@ export const gift_request = pgTable("gift_request", {
 
 export const transactionStatus = pgEnum("transaction_status", ["pending", "preparing", "waiting_approval", "authorized", "completed", "denied", "cancelled", "needs_revision"])
 
-export const transaction = pgTable("transaction", {
+export const transaction_table = pgTable("transactions", {
   id: uuid().primaryKey().defaultRandom(),
-  giftRequestId: uuid().notNull().references(() => session.id),
+  giftRequestId: uuid().notNull().references(() => session_table.id),
   idempotencyKey: text().notNull().unique(),
   sapiomTransactionId: text().unique(),
   status: transactionStatus().notNull().default("pending"),
