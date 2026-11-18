@@ -39,6 +39,6 @@
   ],
   "exclude": [
     "node_modules",
-    "src/index.ts", // TODO: temporary until that file is fixed with the right data
+    "src/index.ts",
   ]
 }
