@@ -27,7 +27,7 @@ export async function sapiomFetch<T>(path: string, req: SapiomRequest): Promise<
 
     const headers: Record<string, string> = { "x-api-key": req.apiKey };
     if (req.body !== undefined) headers["Content-Type"] = "application/json";
-    if (req.tenantId) headers["Content-Type"] = req.tenantId;
+    if (req.tenantId) headers["sapiom-tenant"] = req.tenantId;
     if (req.idempotencyKey) headers["Idempotency-Key"] = req.idempotencyKey;
 
     const res = await fetch(url, {
