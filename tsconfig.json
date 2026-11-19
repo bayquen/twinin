@@ -6,6 +6,8 @@
       "@/components/*": ["./src/components/*"],
       "@/utils/*": ["./src/utils/*"],
       "@/db/*": ["./src/db/*"],
+      "@/lib/sapiom": ["./src/lib/sapiom"],
+      "@/lib/sapiom/dev-fixtures": ["./src/lib/sapiom/dev-fixtures"],
     },
     "target": "ES2017",
     "lib": [
