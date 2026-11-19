@@ -1,3 +1,7 @@
+// Program: transactions.ts
+// Purpose: Creates, reads and cancels transactions. UCP purchases cancel through the 
+//          checkout route, and getConfirmUrl pulls out the confirm link.
+
 import { sapiomFetch } from "./http";
 import type { MerchantInfo, SapiomTransaction, Shipping } from "./types";
 
