@@ -5,6 +5,7 @@ import {
     createUcpTransaction, getConfirmUrl, SapiomError,
 } from "@/lib/sapiom";
 import { TEST_STORE, TEST_SHIPPING } from "@/lib/sapiom/dev-fixtures";
+import { waitForNextAction } from "@/lib/sapiom/transactions";
 
 const PEN_LIMIT_CENTS = 5000;  // generous sandbox cap; the user's budget can be used and tested separately as desired
 
@@ -31,7 +32,7 @@ export async function POST() {
         // function call once Sapiom confirms access(?).
         // await setPurchaseLimit(tenantId, cardId, PEN_LIMIT_CENTS);
 
-        const tx = await createUcpTransaction({
+        const created = await createUcpTransaction({
             userKey,
             idempotencyKey: randomUUID(),
             merchant: TEST_STORE.merchant,
@@ -39,6 +40,7 @@ export async function POST() {
             shipping: TEST_SHIPPING,
             paymentCardId: cardId,
         });
+        const tx = await waitForNextAction(userKey, created);
 
         const confirmUrl = getConfirmUrl(tx);
         if (!confirmUrl) {

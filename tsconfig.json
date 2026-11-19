@@ -7,7 +7,7 @@
       "@/utils/*": ["./src/utils/*"],
       "@/db/*": ["./src/db/*"],
       "@/lib/sapiom": ["./src/lib/sapiom"],
-      "@/lib/sapiom/dev-fixtures": ["./src/lib/sapiom/dev-fixtures"],
+      "@/lib/sapiom/*": ["./src/lib/sapiom/*"],
     },
     "target": "ES2017",
     "lib": [

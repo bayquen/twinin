@@ -43,6 +43,23 @@ export function getTransaction(
     });
 }
 
+// `create` returns before Sapiom finishes opening the merchant checkout, so the first
+// nextAction is usually { wait, system }. Long-poll until it becomes someone else's
+// (the buyer) or we hit the deadline. The deadline stops this loop from running forever.
+export async function waitForNextAction(
+    userKey: string,
+    tx: SapiomTransaction,
+    { timeoutMs = 30_000 }: { timeoutMs?: number } = {},
+  ): Promise<SapiomTransaction> {
+    const deadline = Date.now() + timeoutMs;
+    let current = tx;
+    while (current.nextAction?.actor === "system" && Date.now() < deadline) {
+        // Holds the request open up to 10s, returning early once `version` changes.
+        current = await getTransaction(userKey, current.id, { maxWaitSeconds: 10, since: current.version });
+    }
+    return current;
+}
+
 // UCP purchases cancel via the CHECKOUT route. The generic /cancel is browser-only
 // (409 not_a_browser_purchase). Cancelling twice is a no-op. Cancelling never refunds.
 export function cancelTransaction(userKey: string, id: string) {
