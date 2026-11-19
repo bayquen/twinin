@@ -34,4 +34,10 @@ export type SapiomTransaction = {
     order?: { outcome?: string } | null;  // UCP: only "confirmed" means order was placed
 };
 
+export type MerchantCheck = {
+    status: "supported" | "unsupported" | "unknown";
+    reason: string;
+    retryAfterSeconds: number | null;
+}
+
 export type SpendingLimits = { version: number; purchaseLimit: { amount: string; currency: "USD" } | null };
