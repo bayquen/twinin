@@ -27,7 +27,9 @@ export async function POST() {
             return NextResponse.json({ error: "merchant_not_supported", check }, { status: 422 });
         }
 
-        await setPurchaseLimit(tenantId, cardId, PEN_LIMIT_CENTS);
+        // BLOCKED: spending-limits returns 403 (org.read). Uncomment this
+        // function call once Sapiom confirms access(?).
+        // await setPurchaseLimit(tenantId, cardId, PEN_LIMIT_CENTS);
 
         const tx = await createUcpTransaction({
             userKey,
