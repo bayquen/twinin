@@ -6,6 +6,7 @@
       "@/components/*": ["./src/components/*"],
       "@/utils/*": ["./src/utils/*"],
       "@/db/*": ["./src/db/*"],
+      "@/lib/*": ["./src/lib/*"],
       "@/lib/sapiom": ["./src/lib/sapiom"],
       "@/lib/sapiom/*": ["./src/lib/sapiom/*"],
     },
