@@ -9,7 +9,7 @@ const PicksSchema = z.object({
 });
 export type AiPick = z.infer<typeof PicksSchema>["picks"][number];
 
-const SYSTEM_PROMPT = `You pick gifts Reply with ONLY a json object, shaped exactly like:
+const SYSTEM_PROMPT = `You pick gifts. Reply with ONLY a json object, shaped exactly like:
 {"picks":[{"id":"c3","reason":"Short reason, max 25 words."}]}
 Rules:
 - Choose up to 3 products, best first. Use ONLY ids from the list you are given.

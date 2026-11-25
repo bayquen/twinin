@@ -35,6 +35,7 @@ async function getJson(m: MerchantConfig): Promise<unknown> {
         res = await fetch(`https://${m.domain}/products.json?limit=250`, {
             headers: { Accept: "application/json", "User-Agent": "Twinin/0.1" },
             next: { revalidate: 600 },  // ask Next to cache for 10 min
+            signal: AbortSignal.timeout(10_000),
         });
     } catch {
         // Timeout or network failure. The raw error is dropped on purpose: it's noise to the caller.
