@@ -5,10 +5,17 @@ import { fetchShopifyCandidates } from "./shopify";
 export { MERCHANTS, type MerchantConfig };
 export { CatalogError } from "./shopify";
 
+export class UnknownMerchantError extends Error {
+    constructor(id: string) {
+        super(`Unknown merchant: ${id}`);
+        this.name = "UnknownMerchantError";
+    }
+}
+
 // First allowlist gate: an id that isn't in MERCHANTS can never reach the network.
 export function getMerchant(id: string): MerchantConfig {
     const m = MERCHANTS.find((x) => x.id === id);
-    if (!m) throw new Error(`Unknown merchant: ${id}`);
+    if (!m) throw new UnknownMerchantError(id);
     return m;
 }
 
